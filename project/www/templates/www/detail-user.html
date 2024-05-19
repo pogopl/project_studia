@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+</head>
+<body>
+    <h2>{{ user.name }} {{ user.last_name }}</h2>
+    <img width="300" src="{{ user.zdjecie.url }}" alt="">
+    <hr>
+    {% for task in user.tasks.all %}
+        <a href="{% url 'detail-task' pk=task.id %}"><p>{{ task.name }}</p></a>
+    {% endfor %}
+</body>
+</html>
