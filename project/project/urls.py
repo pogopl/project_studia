@@ -1,8 +1,7 @@
-"""
-URL configuration for project project.
+"""project URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.0/topics/http/urls/
+    https://docs.djangoproject.com/en/4.1/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -15,13 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from . import views
+from django.urls import path, include
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('project/<int:pk>/', views.detail_project, name='detail-project'),
-    path('task/<int:pk>/', views.detail_task, name='detail-task'),
-    path('user/<int:pk>/', views.detail_user, name='detail-user'),
-    path('bootstrap/', views.bootstrap, name='bootstrap'),
-]
+    path('admin/', admin.site.urls),
+    path('', include('www.urls'))
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

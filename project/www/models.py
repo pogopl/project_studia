@@ -26,7 +26,7 @@ class Task(models.Model):
     description = models.CharField(max_length=2000)
     start_date = models.DateTimeField(auto_now=False, auto_now_add=True)
     end_date = models.DateTimeField(auto_now=False, auto_now_add=True)
-    status = models.charField(
+    status = models.CharField(
             max_length=50,
             choices=TaskStatus.choices(),
             default=TaskStatus.NOT_STARTED.value)
