@@ -48,58 +48,58 @@ def detail_user(request, pk):
 
 ################################################################################################
 
-def wydzialy_lista(request):
-    return render(request, 'www/wydzialy.html', {
-        'wydzialy': wydzialy
+def Projects_list(request):
+    return render(request, 'www/Projects.html', {
+        'Projects': Projects
         })
 
-def kierunki_lista(request):
-    return render(request, 'www/kierunki.html', {
-        'kierunki': kierunki
+def Tasks_list(request):
+    return render(request, 'www/Tasks.html', {
+        'Tasks': Tasks
         })
 
-def studenci_lista(request):
-    return render(request, 'www/studenci.html', {
-        'studenci': studenci
+def Users_list(request):
+    return render(request, 'www/Users.html', {
+        'Users': Users
         })
 
-def dodaj_wydzial(request):
+def add_Project(request):
     if request.method == 'POST':
-        form = WydzialForm(request.POST, request.FILES)
+        form = ProjectForm(request.POST, request.FILES)
 
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/zapisano')
+            return HttpResponseRedirect('/saved')
     else:
-        form = WydzialForm()
+        form = ProjectForm()
 
-    return render(request, 'www/dodaj-wydzial.html', {'form': form})
+    return render(request, 'www/add-Project.html', {'form': form})
 
 
-def dodaj_kierunek(request):
+def add_Task(request):
     if request.method == 'POST':
-        form = KierunekForm(request.POST)
+        form = TaskForm(request.POST)
 
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/zapisano')
+            return HttpResponseRedirect('/saved')
     else:
-        form = KierunekForm()
+        form = TaskForm()
 
-    return render(request, 'www/dodaj-kierunek.html', {'form': form})
+    return render(request, 'www/add-Task.html', {'form': form})
 
 
-def dodaj_studenta(request):
+def add_User(request):
     if request.method == 'POST':
-        form = StudentForm(request.POST, request.FILES)
+        form = UserForm(request.POST, request.FILES)
 
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/zapisano')
+            return HttpResponseRedirect('/saved')
     else:
-        form = StudentForm()
+        form = UserForm()
 
-    return render(request, 'www/dodaj-studenta.html', {'form': form})
+    return render(request, 'www/add-User.html', {'form': form})
 
 
 def zapisano(request):
