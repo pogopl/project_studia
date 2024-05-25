@@ -1,0 +1,139 @@
+<!doctype html>
+
+<html lang="pl" class="h-100" data-bs-theme="auto">
+
+  <head>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+
+    
+
+    <title>{% block title %}{% endblock %}</title>
+
+
+
+    <link href="https://getbootstrap.com/docs/5.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+
+
+    <link href="https://getbootstrap.com/sticky-footer-navbar.css" rel="stylesheet">
+
+  </head>
+
+    <body class="d-flex flex-column h-100">
+
+
+
+        <header>
+
+            <nav class="navbar navbar-expand-lg bg-body-tertiary rounded" aria-label="Thirteenth navbar example">
+
+                <div class="container-fluid">
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample11" aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
+
+                    <span class="navbar-toggler-icon"></span>
+
+                </button>
+
+
+
+                <div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
+<<!--######################################################################################################################################-->>
+                    <a class="navbar-brand col-lg-3 me-0" href="{% url 'index' %}">Logo</a>
+
+                    <ul class="navbar-nav col-lg-6 justify-content-lg-center">
+
+                        <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Projects</a>
+
+                            <ul class="dropdown-menu">
+
+                                <li><a class="dropdown-item" href="{% url 'Projects-list' %}">Projects</a></li>
+
+                                <li><a class="dropdown-item" href="{% url 'add-Project' %}">add Project</a></li>
+
+                            </ul>
+
+                        </li>  
+
+                        <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Tasks</a>
+
+                            <ul class="dropdown-menu">
+
+                                <li><a class="dropdown-item" href="{% url 'Tasks-list' %}">Tasks List</a></li>
+
+                                <li><a class="dropdown-item" href="{% url 'add-Task' %}">add Task</a></li>
+
+                            </ul>
+
+                        </li>  
+
+                        <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Users</a>
+
+                            <ul class="dropdown-menu">
+
+                                <li><a class="dropdown-item" href="{% url 'Users-list' %}">Users List</a></li>
+
+                                <li><a class="dropdown-item" href="{% url 'add-User' %}">add User</a></li>
+
+                            </ul>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                </div>
+
+            </nav>
+
+        </header>
+
+
+
+
+
+        <main class="flex-shrink-0">
+
+            <div class="container mt-5">
+
+                {% block content %}
+
+
+
+                {% endblock %}
+
+            </div>
+
+        </main>
+
+
+
+        <footer class="footer mt-auto py-3 bg-body-tertiary">
+
+        <div class="container">
+
+            <span class="text-body-secondary">{% block footer %}{% endblock %}</span>
+
+        </div>
+
+        </footer>
+
+<script src="https://getbootstrap.com/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+
+
+    </body>
+
+</html>
