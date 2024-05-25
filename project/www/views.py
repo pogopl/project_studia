@@ -50,17 +50,17 @@ def detail_user(request, pk):
 
 def Projects_list(request):
     return render(request, 'www/Projects.html', {
-        'Projects': Projects
+        'Projects': Project
         })
 
 def Tasks_list(request):
     return render(request, 'www/Tasks.html', {
-        'Tasks': Tasks
+        'Tasks': Task
         })
 
 def Users_list(request):
     return render(request, 'www/Users.html', {
-        'Users': Users
+        'Users': User
         })
 
 def add_Project(request):
