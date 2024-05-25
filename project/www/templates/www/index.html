@@ -1,30 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Super Advanced jira</title>
-</head>
-<body>
+{% extends "www/base.html" %}
+
+
+
+{% block title %}General Projects,Tasks,Users{% endblock %}
+
+
+
+{% block content %}
+
     <h2>Projects</h2>
-    {% for project in projects %}
 
-    <h2><a href="{% url 'detail-project' pk=project.pk %}">{{project.name}}</a></h2>
+    {% for Project in Projects %}
+
+    
+
+    <h5><a href="{% url 'detail-Project' pk=Project.pk %}">{{Project.name}}</a></h5>
+
+    
 
     {% endfor %}
+
     <hr>
+
     <h2>Tasks</h2>
-    {% for task in tasks %}
 
-    <h2><a href="{% url 'detail-task' pk=task.pk %}">{{task.name}}</a></h2>
+    {% for Task in Tasks %}
+
+    
+
+    <h5><a href="{% url 'detail-Task' pk=Task.pk %}">{{Task.name}}</a></h5>
+
+    
 
     {% endfor %}
+
     <hr>
-    <h2>Users</h2>
-    {% for user in users %}
 
-    <h2><a href="{% url 'detail-user' pk=user.pk %}">{{user.name}} {{usen.last_name}}, email: {{ user.email }}, tasks: {{user.tasks}}</a></h2>
+    <h2>Users</h2>
+
+    {% for User in Users %}
+
+    
+
+    <h5><a href="{% url 'detail-User' pk=User.pk %}">{{User.name}} {{User.last_name}}, email: {{ User.email }}</a></h5>
+
+    
 
     {% endfor %}
-</body>
-</html>
+
+
+
+{% endblock %}
+
+
+
+{% block footer %}
+
+Footer
+
+{% endblock %}
