@@ -1,0 +1,25 @@
+{% extends "www/base.html" %}
+
+
+
+{% block title %}General Users{% endblock %}
+
+
+
+{% block content %}
+
+    <h2>Users</h2>
+
+    {% for User in Users %}
+
+    
+
+    <h5><a href="{% url 'detail-User' pk=User.pk %}">{{User.name}} {{User.last_name}}, email: {{ User.email }}</a></h5>
+
+    
+
+    {% endfor %}
+
+
+
+{% endblock %}
