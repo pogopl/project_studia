@@ -4,10 +4,10 @@
 
 {% block content %}
     <h2>Projects</h2>
-    {% if not projects %}
+    {% if not Projects%}
         <h5>No projects</h5>
     {% endif %}
-    {% for project in projects %}
+    {% for project in Projects %}
         <h5>
             <a href="{% url 'detail-project' pk=project.id %}">{{ project.name }}</a>
         </h5>

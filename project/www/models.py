@@ -1,8 +1,8 @@
 from django.db import models
 from enum import Enum
 
-class Project(models.Model):
 
+class Project(models.Model):
     name = models.CharField(max_length=200)
     description = models.CharField(max_length=2000)
     start_date = models.DateTimeField(auto_now=False, auto_now_add=True)

@@ -12,9 +12,9 @@
             success: function(data) {
                 let projectsDiv = $('#projects');
                 projectsDiv.empty();
-                data.projects.forEach(project => {
-                    projectsDiv.append(`<h5>${project.name}</h5>`);
-                });
+                for (let i = 0; i < data.Projects.length; i++ ) {
+                  projectsDiv.append(`<h5>${data.Projects[i].name}</h5>`)
+                }
             },
             error: function(xhr, status, error) {
                 console.error('Failed to load projects:', status, error);
