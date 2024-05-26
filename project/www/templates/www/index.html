@@ -1,61 +1,79 @@
 {% extends "www/base.html" %}
 
-
-
 {% block title %}General Projects,Tasks,Users{% endblock %}
 
-
-
 {% block content %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function loadProjects() {
+        $.ajax({
+            url: "{% url 'get_projects' %}",
+            method: 'GET',
+            success: function(data) {
+                let projectsDiv = $('#projects');
+                projectsDiv.empty();
+                data.projects.forEach(project => {
+                    projectsDiv.append(`<h5>${project.name}</h5>`);
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error('Failed to load projects:', status, error);
+            }
+        });
+    }
 
+    function loadTasks() {
+        $.ajax({
+            url: "{% url 'get_tasks' %}",
+            method: 'GET',
+            success: function(data) {
+                let tasksDiv = $('#tasks');
+                tasksDiv.empty();
+                data.tasks.forEach(task => {
+                    tasksDiv.append(`<h5>${task.name}, (Project: ${task.projects})</h5>`);
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error('Failed to load tasks:', status, error);
+            }
+        });
+    }
+
+    function loadUsers() {
+        $.ajax({
+            url: "{% url 'get_users' %}",
+            method: 'GET',
+            success: function(data) {
+                let usersDiv = $('#users');
+                usersDiv.empty();
+                data.users.forEach(user => {
+                    usersDiv.append(`<h5>${user.name} ${user.last_name}, email: ${user.email}</h5>`);
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error('Failed to load users:', status, error);
+            }
+        });
+    }
+</script>
     <h2>Projects</h2>
-
-    {% for Project in Projects %}
-
-    
-
-    <h5><a href="{% url 'detail-Project' pk=Project.pk %}">{{Project.name}}</a></h5>
-
-    
-
-    {% endfor %}
-
-    <hr>
+    <div id="projects"></div>
+    <button id="load-projects-btn" type="button" onclick="loadProjects()">Load Projects</button>
+    <hr />
 
     <h2>Tasks</h2>
-
-    {% for Task in Tasks %}
-
-    
-
-    <h5><a href="{% url 'detail-Task' pk=Task.pk %}">{{Task.name}}</a></h5>
-
-    
-
-    {% endfor %}
-
-    <hr>
+    <div id="tasks"></div>
+    <button id="load-tasks-btn" type="button" onclick="loadTasks()">Load Tasks</button>
+    <hr />
 
     <h2>Users</h2>
-
-    {% for User in Users %}
-
-    
-
-    <h5><a href="{% url 'detail-User' pk=User.pk %}">{{User.name}} {{User.last_name}}, email: {{ User.email }}</a></h5>
-
-    
-
-    {% endfor %}
-
-
-
+    <div id="users"></div>
+    <button id="load-users-btn" type="button" onclick="loadUsers()">Load Users</button>
+{% endblock %}
+{% block footer %}
+staszekjanik.2004@gmail.com
 {% endblock %}
 
-
-
-{% block footer %}
-
-Footer
+{% block extra_js %}
 
 {% endblock %}

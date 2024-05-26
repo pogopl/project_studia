@@ -1,25 +1,35 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Project, Task, User
 from .forms import ProjectForm, TaskForm, UserForm
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 
-
-projects = Project.objects.all()
-tasks = Task.objects.all()
-users = User.objects.all()
-
-
-# Create your views here.
 def index(request):
+    return render(request, 'www/index.html')
 
-    return render(request, 'www/index.html', {
-        'projects': projects,
-        'tasks': tasks,
-        'users': users,
-        })
+def get_projects(request):
+    projects = Project.objects.all().values('id', 'name')
+    projects_list = list(projects)
+    return JsonResponse({'Projects': projects_list})
+
+def get_tasks(request):
+    tasks = Task.objects.all().values('id', 'name', 'projects__name')
+    tasks_list = list()
+    for task in tasks:
+        task_data = {
+            'id': task['id'],
+            'name': task['name'],
+            'projects': task['projects__name']
+        }
+        tasks_list.append(task_data)
+    return JsonResponse({'tasks': tasks_list})
+
+def get_users(request):
+    users = User.objects.all().values('id', 'name', 'last_name', 'email')
+    users_list = list(users)
+    return JsonResponse({'users': users_list})
 
 def bootstrap(request):
-
+    users = User.objects.all()
     return render(request, 'www/bootstrap.html', {
         'users': users
         })
@@ -48,15 +58,22 @@ def detail_user(request, pk):
 
 ################################################################################################
 
-def Projects_list(request):
+def projects_list(request):
+    projects = Project.objects.all()
     return render(request, 'www/Projects.html', {
-        'Projects': Project
+        'Projects': projects
         })
 
-def Tasks_list(request):
-    return render(request, 'www/Tasks.html', {
-        'Tasks': Task
+def tasks_list(request):
+    tasks = Task.objects.all().prefetch_related('projects')
+    task_list = []
+    for task in tasks:
+        task_list.append({
+            'id': task.id,
+            'name': task.name,
+            'projects': ', '.join([project.name for project in task.projects.all()])
         })
+    return render(request, 'www/Tasks.html', {'tasks': task_list})
 
 def Users_list(request):
     return render(request, 'www/Users.html', {
@@ -102,5 +119,5 @@ def add_User(request):
     return render(request, 'www/add-User.html', {'form': form})
 
 
-def zapisano(request):
-    return render(request, 'www/zapisano.html')
+def saved(request):
+    return render(request, 'www/saved.html')

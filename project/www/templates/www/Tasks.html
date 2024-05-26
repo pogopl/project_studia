@@ -1,0 +1,16 @@
+{% extends "www/base.html" %}
+
+{% block title %}General Tasks{% endblock %}
+
+{% block content %}
+    <h2>Tasks</h2>
+    {% if not tasks %}
+        <h5> No tasks </h5>
+    {% endif %}
+    {% for task in tasks %}
+        <h5>
+            <a href="{% url 'detail-task' pk=task.id %}">{{ task.name }}</a>
+            <span>(Projects: {{ task.projects }})</span>
+        </h5>
+    {% endfor %}
+{% endblock %}
